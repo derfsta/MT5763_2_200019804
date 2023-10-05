@@ -1,0 +1,263 @@
+---
+title: "Analysis of bicycle rentals\nin Washington D.C. and Seoul"
+author: "Student 200019804"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+library(magrittr)
+library(lubridate)
+library(patchwork)
+setwd("~/R/R WD")
+```
+
+
+
+```{r Reading in data, echo=FALSE}
+setwd("~/R/R WD")
+seoul <- read.csv("BikeSeoul.csv")
+washington <- read.csv("BikeWashingtonDC.csv")
+```
+
+
+
+```{r data wrangling, include=FALSE}
+
+seoul2 <- seoul %>%
+  
+  select(-Visibility..10m.,
+         -Dew.point.temperature.C.,
+         -Solar.Radiation..MJ.m2.,
+         -Rainfall.mm., -Snowfall..cm.) %>%
+  
+  filter(Functioning.Day == "Yes") %>%
+  
+  select(-Functioning.Day)
+
+#maybe pipe here?
+
+colnames(seoul2) <- c("Date", "Count", "Hour", "Temperature", "Humidity",
+  "WindSpeed", "Season", "Holiday") #way to do with pipe????
+
+
+seoul3 <- mutate(seoul2, "Date" = as.Date(Date, format = "%d/%m/%Y")) %>%
+  
+  mutate("FullDate" = make_datetime(
+           
+           year(Date),month(Date), day(Date),Hour))
+
+
+
+seoul3$Holiday <- as.factor(seoul3$Holiday)
+levels(seoul3$Holiday) <- c("Yes", "No")
+
+
+seoul3$Season <- as.factor(seoul3$Season)
+seoul3$Season <- factor(seoul3$Season, 
+                        levels = c("Spring","Summer",
+                                   "Autumn", "Winter"))
+
+
+washington2 <- washington %>%
+  
+  select(-instant, -yr, -mnth, -weekday, -workingday,
+         -weathersit, -atemp, -casual, -registered)
+
+colnames(washington2) <- c("Date", "Season", "Hour", "Holiday",
+                "Temperature", "Humidity", "WindSpeed", "Count")
+
+washington3 <- washington2 %>%
+  
+  mutate("Humidity" = Humidity*100,
+         "Temperature" = 47*Temperature - 8,
+         "WindSpeed" = (5/18)*67*WindSpeed,          #m/s conversion rate 5/18
+         "Date" = as.Date(Date, format = "%Y-%m-%d"),
+         "FullDate" = make_datetime(
+           year(Date),month(Date), day(Date),Hour)) 
+  
+
+washington3$Season <- factor(washington3$Season,
+                             levels = c("2", "3","4", "1")) # re-ordering
+
+levels(washington3$Season) <- c("Spring", "Summer", # re-naming
+                                "Autumn", "Winter")
+  
+#i think this is right now? factors are the worst
+
+washington3$Holiday <- factor(washington3$Holiday, #re ordering
+       levels = c("1", "0"))
+
+levels(washington3$Holiday) <- c("Yes", "No") # re naming
+
+```
+
+## Climate
+
+To begin to understand bike rental numbers in the two cities, it is important to understand each city's climate.
+
+```{r, temperature plots, echo=FALSE}
+kr1 <- ggplot(seoul3, aes(x = Date, y = Temperature)) +
+  geom_point(aes(color = Hour), alpha = 0.2) +
+  
+  geom_smooth(color = "black") + theme_light() +
+  
+  labs(x= NULL, y = "Air Temperature (°C)", title = 
+         "Air temperature from December to November",
+       subtitle = "Seoul 2017/18") +
+  
+  scale_color_gradient2(mid = "#66C9FF",low = "#001B6B",
+                        high = "#001B6B", space = "Lab",
+                        midpoint = 12) + 
+  
+  expand_limits(y = c(-20, 40)) + 
+  
+  scale_y_continuous(breaks = seq(-20, 40, 10)) 
+  
+  #theme(plot.title = element_text(size=10))
+
+
+dc1 <- ggplot(washington3[7905:16637,], aes(x = Date, y = Temperature)) +
+  
+  geom_point(aes(color = Hour), alpha = 0.3) + 
+  
+  geom_smooth(color = "black") + theme_light() +
+  
+  labs(x= NULL, y = "Air Temperature (°C)",
+   subtitle = "Washington D.C. 2011/12") +
+  
+  scale_color_gradient2(mid = "#FFA600",low = "#6B0000",
+                        high = "#6B0000", space = "Lab",
+                        midpoint = 12) + 
+  
+  expand_limits(y = c(-20, 40)) + 
+  
+  scale_y_continuous(breaks = seq(-20, 40, 10))
+
+
+```
+
+
+```{r fig1, fig.width=5,fig.height=5,fig.cap="\\label{fig:fig1} Air Temperature in Seoul and Washington D.C.", message=FALSE, fig.align='center', echo=FALSE}
+kr1/dc1
+```
+
+Figure \ref{fig:fig1} shows the air temperature (°C) throughout a year in Washington D.C. and Seoul. Visibly the climate Seoul is more extreme in the chosen year, with a hotter summer and colder winter. 
+
+
+```{r, echo=FALSE}
+
+count_month_DC <- washington3 %>% group_by(Season) %>%
+  
+  summarise("Count" = mean(Count))
+
+count_month_KR <- seoul3 %>% group_by(Season) %>%
+  
+  summarise("Count" = mean(Count))
+
+
+dc2 <- ggplot(count_month_DC, aes(x = Season, y = Count, fill = Season)) +
+  
+  geom_bar(stat = "identity", color = "black") + theme_light() +
+  
+  theme(legend.position='none') + expand_limits(y = 250) + 
+  
+  scale_y_continuous(breaks = seq(0, 250, 50)) +
+  
+  labs(x = NULL, y = NULL,
+       subtitle = "Washington D.C.")
+
+
+
+kr2 <- ggplot(count_month_KR, aes(x = Season, y = Count, fill = Season)) +
+  
+  geom_bar(stat = "identity", color = "black") + theme_light() +
+  
+  theme(legend.position='none') + expand_limits(y = 1100) + 
+  
+  scale_y_continuous(breaks = seq(0, 1100, 200)) +
+  
+  theme(plot.title = element_text(size=15)) +
+  
+  labs(x = NULL, y = NULL, subtitle = "Seoul", title = 
+         "Average number of bike rentals in each season",)
+
+```
+
+```{r fig2, fig.width=5,fig.height=5,fig.cap="\\label{fig:fig2} Bike rentals in Seoul and Washington D.C.", message=FALSE, fig.align='center', echo=FALSE}
+kr2/dc2
+```
+
+```{r, echo=FALSE}
+count_holiday_DC <- washington3 %>% group_by(Holiday) %>%
+  
+  summarise("Count" = mean(Count))
+
+count_holiday_KR <- seoul3 %>% group_by(Holiday) %>%
+  
+  summarise("Count" = mean(Count))
+
+
+dc3 <- ggplot(count_holiday_DC, aes(x = Holiday, y = Count, fill = Holiday)) +
+  
+  geom_bar(stat = "identity", color = "black") + theme_light() + 
+  
+  theme(legend.position="none") + expand_limits(y = 200) + 
+  
+  scale_y_continuous(breaks = seq(0, 200, 20)) +
+  
+  scale_x_discrete(labels=c("Holiday", "Not Holiday")) +
+  
+  scale_fill_manual(values = c("#e35e17", "#f7831e")) +
+  
+  labs(x = NULL, y = NULL, title = 
+         "Average number of bike rentals in DC\non holidays and otherwise")
+
+
+
+kr3 <- ggplot(count_holiday_KR, aes(x = Holiday, y = Count, fill = Holiday)) +
+  
+  geom_bar(stat = "identity", color = "black") + theme_light() + 
+  
+  theme(legend.position='none') + expand_limits(y = 800) +
+  
+  scale_y_continuous(breaks = seq(0, 800, 100)) +
+  
+  scale_x_discrete(labels=c("Holiday", "Not Holiday")) +
+  
+  scale_fill_manual(values = c("#275aab", "#4b89eb")) +
+  
+  labs(x = NULL, y = NULL, title = 
+  "Average number of bike rentals in Seoul\non holidays and otherwise")
+
+```
+
+```{r fig3, fig.width=5,fig.height=5,fig.cap="\\label{fig:fig3} Bike rentals in Seoul and Washington D.C.", message=FALSE, fig.align='center', echo=FALSE}
+
+kr3/dc3
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
