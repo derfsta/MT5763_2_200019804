@@ -12,6 +12,7 @@ library(dplyr)
 library(magrittr)
 library(lubridate)
 library(patchwork)
+library(knitr)
 setwd("~/R/R WD")
 ```
 
@@ -25,7 +26,7 @@ washington <- read.csv("BikeWashingtonDC.csv")
 
 
 
-```{r data wrangling, include=FALSE}
+```{r data wrangling, echo=FALSE}
 
 seoul2 <- seoul %>%
   
@@ -116,8 +117,6 @@ kr1 <- ggplot(seoul3, aes(x = Date, y = Temperature)) +
   expand_limits(y = c(-20, 40)) + 
   
   scale_y_continuous(breaks = seq(-20, 40, 10)) 
-  
-  #theme(plot.title = element_text(size=10))
 
 
 dc1 <- ggplot(washington3[7905:16637,], aes(x = Date, y = Temperature)) +
@@ -145,10 +144,12 @@ dc1 <- ggplot(washington3[7905:16637,], aes(x = Date, y = Temperature)) +
 kr1/dc1
 ```
 
-Figure \ref{fig:fig1} shows the air temperature (°C) throughout a year in Washington D.C. and Seoul. Visibly the climate Seoul is more extreme in the chosen year, with a hotter summer and colder winter. 
+Figure \ref{fig:fig1} shows the air temperature (°C) throughout a year in Washington D.C. and Seoul. The temperature peaks between July and August in both cities. Visibly the climate in Seoul is more extreme than in Washington D.C. in the chosen year, with a hotter summer and colder winter.
+
+\ref{fig:fig2} shows the impact of Seoul's colder winters on bike rentals. The bike rentals in winter are noticeably lower than those in Washington D.C., when compared to the other seasons.
 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 
 count_month_DC <- washington3 %>% group_by(Season) %>%
   
@@ -187,11 +188,11 @@ kr2 <- ggplot(count_month_KR, aes(x = Season, y = Count, fill = Season)) +
 
 ```
 
-```{r fig2, fig.width=5,fig.height=5,fig.cap="\\label{fig:fig2} Bike rentals in Seoul and Washington D.C.", message=FALSE, fig.align='center', echo=FALSE}
+```{r fig2, fig.width=4,fig.height=4,fig.cap="\\label{fig:fig2} Bike rentals in Seoul and Washington D.C.", message=FALSE, fig.align='center', echo=FALSE}
 kr2/dc2
 ```
 
-```{r, echo=FALSE}
+```{r, echo = FALSE}
 count_holiday_DC <- washington3 %>% group_by(Holiday) %>%
   
   summarise("Count" = mean(Count))
@@ -201,7 +202,9 @@ count_holiday_KR <- seoul3 %>% group_by(Holiday) %>%
   summarise("Count" = mean(Count))
 
 
-dc3 <- ggplot(count_holiday_DC, aes(x = Holiday, y = Count, fill = Holiday)) +
+dc3 <- ggplot(count_holiday_DC,
+              
+              aes(x = Holiday, y = Count, fill = Holiday)) +
   
   geom_bar(stat = "identity", color = "black") + theme_light() + 
   
@@ -213,12 +216,14 @@ dc3 <- ggplot(count_holiday_DC, aes(x = Holiday, y = Count, fill = Holiday)) +
   
   scale_fill_manual(values = c("#e35e17", "#f7831e")) +
   
-  labs(x = NULL, y = NULL, title = 
-         "Average number of bike rentals in DC\non holidays and otherwise")
+  labs(x = NULL, y = NULL, subtitle = 
+         "Washington D.C.")
 
 
 
-kr3 <- ggplot(count_holiday_KR, aes(x = Holiday, y = Count, fill = Holiday)) +
+kr3 <- ggplot(count_holiday_KR, 
+              
+              aes(x = Holiday, y = Count, fill = Holiday)) +
   
   geom_bar(stat = "identity", color = "black") + theme_light() + 
   
@@ -231,26 +236,168 @@ kr3 <- ggplot(count_holiday_KR, aes(x = Holiday, y = Count, fill = Holiday)) +
   scale_fill_manual(values = c("#275aab", "#4b89eb")) +
   
   labs(x = NULL, y = NULL, title = 
-  "Average number of bike rentals in Seoul\non holidays and otherwise")
+  "Average number of bike rentals on holidays and otherwise",
+  subtitle = "Seoul")
 
 ```
 
-```{r fig3, fig.width=5,fig.height=5,fig.cap="\\label{fig:fig3} Bike rentals in Seoul and Washington D.C.", message=FALSE, fig.align='center', echo=FALSE}
+```{r fig3, fig.width=4,fig.height=4,fig.cap="\\label{fig:fig3} Bike rentals in Seoul and Washington D.C.", message=FALSE, fig.align='center', echo=FALSE}
 
 kr3/dc3
 
 
 ```
 
+```{r, echo=FALSE}
+kr_met1 <- ggplot(seoul3, aes(y = Count, x = WindSpeed)) +
+  
+  geom_jitter(width = 0.02, height = 0,
+              alpha = 0.5,color = "#001B6B") + 
+  
+  geom_smooth() +
+  
+  labs(x = "Wind Speed (m/s)", title =
+  "Number of bike rentals for different meteoroloigcal\nfactors in Seoul")
+
+kr_met2 <- ggplot(seoul3, aes(y = Count, x = Temperature)) +
+  
+  geom_point(alpha = 0.5, color = "#001B6B") + 
+  
+  geom_smooth() + labs(x = "Temperature (°C)")
 
 
 
+kr_met3 <- ggplot(seoul3, aes(y = Count, x = Humidity)) +
+  
+  geom_point(alpha = 0.5, color = "#001B6B") + 
+  
+  geom_smooth() + labs(x = "Humidity (%)")
+
+kr_met1 / (kr_met2 + kr_met3)
+
+
+dc_met1 <- ggplot(washington3, aes(y = Count, x = WindSpeed)) +
+  
+  geom_jitter(width = 0.02, height = 0,
+              alpha = 0.5,color = "#001B6B") + 
+  
+  geom_smooth() +
+  
+  labs(x = "Wind Speed (m/s)", title =
+         "Number of bike rentals for different meteoroloigcal\nfactors in Washington D.c.")
+
+dc_met2 <- ggplot(washington3, aes(y = Count, x = Temperature)) +
+  
+  geom_point(alpha = 0.5, color = "#001B6B") + 
+  
+  geom_smooth() + labs(x = "Temperature (°C)")
 
 
 
+dc_met3 <- ggplot(washington3, aes(y = Count, x = Humidity)) +
+  
+  geom_point(alpha = 0.5, color = "#001B6B") + 
+  
+  geom_smooth() + labs(x = "Humidity (%)")
+```
+
+```{r fig7, fig.width=5,fig.height=3,fig.cap="\\label{fig:fig7} Seoul bike rentals", message=FALSE, fig.align='center', echo=FALSE}
+kr_met1 / (kr_met2 + kr_met3)
+```
+
+```{r fig6, fig.width=5,fig.height=3,fig.cap="\\label{fig:fig6} Washington D.C. bike rentals", message=FALSE, fig.align='center', echo=FALSE}
+dc_met1 / (dc_met2 + dc_met3)
+```
+
+## Modelling
+
+$$
+log(Count)\sim Season\;+\; Temperature \;+\; Humidity \;+\; Wind Speed
+$$
+
+```{r, echo=FALSE}
+fit_kr <- lm(log(Count) ~ Season + Temperature +
+               
+               Humidity + WindSpeed, data = seoul3)
 
 
 
+fit_dc <- lm(log(Count) ~ Season + Temperature +
+               
+               Humidity + WindSpeed, data = washington3)
+summary(fit_kr)
+
+```
+
+```{r, echo = FALSE}
+summary(fit_dc)
+```
+
+```{r, echo = FALSE}
+kr_resid <- resid(fit_kr)
+dc_resid <- resid(fit_dc)
+```
+
+```{r fig4, fig.width=5,fig.height=3,fig.cap="\\label{fig:fig4} Seoul normal Q-Q plot", message=FALSE, fig.align='center', echo=FALSE}
+qqnorm(kr_resid)
+```
+
+```{r fig5, fig.width=5,fig.height=3,fig.cap="\\label{fig:fig5} Washington D.C. normal Q-Q plot", message=FALSE, fig.align='center', echo=FALSE}
+qqnorm(dc_resid)
+```
+
+
+
+```{r kr_tab, echo=FALSE}
+
+uhh1 <- confint(fit_kr, level = 0.97)
+
+rownames(uhh1) <- c("Intercept", "Summer", "Autumn",          "Winter","Temperature", "Humidity", "Wind Speed")
+
+kable(uhh1, caption = "Seoul model parameters 97% CI")
+
+#maybe ref table using label = ??
+
+```
+
+
+
+```{r dc_tab, echo=FALSE}
+uhh2 <- confint(fit_dc, level = 0.97)
+
+rownames(uhh2) <- c("Intercept", "Summer", "Autumn",          "Winter","Temperature", "Humidity", "Wind Speed")
+
+kable(uhh2, caption = "Wasjington D.C. model parameters 97% CI")
+```
+
+
+## Prediction
+
+```{r, echo=FALSE}
+params <-data.frame(Temperature = 0,
+                  WindSpeed = 0.5,
+                  Humidity = 20,
+                  Season = "Winter")
+
+```
+
+```{r, echo=FALSE}
+
+pred_kr <- predict(fit_kr, newdata = params,
+        
+        interval = "confidence", level = 0.9)
+
+colnames(pred_kr) <- c("Prediction", "5%", "95%")
+
+pred_dc <- predict(fit_dc, newdata = params, 
+        
+        interval = "confidence", level = 0.9)
+colnames(pred_dc) <- c("Prediction", "5%", "95%")
+
+kable(pred_kr, caption = "Seoul prediction")
+
+kable(pred_dc, caption = "Washington D.C. prediction")
+```
 
 
 
