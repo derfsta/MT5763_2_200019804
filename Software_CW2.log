@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.3)  14 OCT 2023 21:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.15)  15 OCT 2023 18:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Software_CW2.tex
 (./Software_CW2.tex
 LaTeX2e <2023-06-01> patch level 1
-L3 programming layer <2023-08-29>
+L3 programming layer <2023-10-10>
 (c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
 (c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
@@ -369,7 +369,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 File: bkm-pdftex.def 2020-11-06 v1.29 bookmark driver for pdfTeX (HO)
 \BKM@id=\count298
 )) (c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2023-04-19 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2023-10-10 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count299
 \l__pdf_internal_box=\box61
 ) (./Software_CW2.aux
@@ -381,9 +381,6 @@ LaTeX Warning: Label `fig:fig2' multiply defined.
 
 
 LaTeX Warning: Label `fig:fig2' multiply defined.
-
-
-LaTeX Warning: Label `fig:fig4' multiply defined.
 
 
 LaTeX Warning: Label `fig:fig5' multiply defined.
@@ -505,86 +502,83 @@ Package pdftex.def Info: Software_CW2_files/figure-latex/fig1-1.pdf  used on inp
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 107.
 (c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-<Software_CW2_files/figure-latex/fig2-1.pdf, id=18, 289.08pt x 289.08pt>
+) [2{c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc} <./Software_CW2_files/figure-latex/fig1-1.pdf>]
+<Software_CW2_files/figure-latex/fig2-1.pdf, id=39, 289.08pt x 289.08pt>
 File: Software_CW2_files/figure-latex/fig2-1.pdf Graphic file (type pdf)
 <use Software_CW2_files/figure-latex/fig2-1.pdf>
-Package pdftex.def Info: Software_CW2_files/figure-latex/fig2-1.pdf  used on input line 121.
+Package pdftex.def Info: Software_CW2_files/figure-latex/fig2-1.pdf  used on input line 120.
 (pdftex.def)             Requested size: 289.09251pt x 289.09251pt.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 128.
-(c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-<Software_CW2_files/figure-latex/fig3-1.pdf, id=19, 289.08pt x 289.08pt>
+[3 <./Software_CW2_files/figure-latex/fig2-1.pdf>]
+<Software_CW2_files/figure-latex/fig3-1.pdf, id=57, 289.08pt x 289.08pt>
 File: Software_CW2_files/figure-latex/fig3-1.pdf Graphic file (type pdf)
 <use Software_CW2_files/figure-latex/fig3-1.pdf>
-Package pdftex.def Info: Software_CW2_files/figure-latex/fig3-1.pdf  used on input line 137.
+Package pdftex.def Info: Software_CW2_files/figure-latex/fig3-1.pdf  used on input line 142.
 (pdftex.def)             Requested size: 289.09251pt x 289.09251pt.
-<Software_CW2_files/figure-latex/fig4-1.pdf, id=20, 289.08pt x 289.08pt>
-File: Software_CW2_files/figure-latex/fig4-1.pdf Graphic file (type pdf)
-<use Software_CW2_files/figure-latex/fig4-1.pdf>
-Package pdftex.def Info: Software_CW2_files/figure-latex/fig4-1.pdf  used on input line 146.
-(pdftex.def)             Requested size: 289.09251pt x 289.09251pt.
-<Software_CW2_files/figure-latex/fig5-1.pdf, id=21, 361.35pt x 216.81pt>
+[4 <./Software_CW2_files/figure-latex/fig3-1.pdf>]
+<Software_CW2_files/figure-latex/fig5-1.pdf, id=69, 361.35pt x 216.81pt>
 File: Software_CW2_files/figure-latex/fig5-1.pdf Graphic file (type pdf)
 <use Software_CW2_files/figure-latex/fig5-1.pdf>
-Package pdftex.def Info: Software_CW2_files/figure-latex/fig5-1.pdf  used on input line 155.
+Package pdftex.def Info: Software_CW2_files/figure-latex/fig5-1.pdf  used on input line 210.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<Software_CW2_files/figure-latex/fig6-1.pdf, id=22, 361.35pt x 216.81pt>
+<Software_CW2_files/figure-latex/fig6-1.pdf, id=71, 361.35pt x 216.81pt>
 File: Software_CW2_files/figure-latex/fig6-1.pdf Graphic file (type pdf)
 <use Software_CW2_files/figure-latex/fig6-1.pdf>
-Package pdftex.def Info: Software_CW2_files/figure-latex/fig6-1.pdf  used on input line 164.
+Package pdftex.def Info: Software_CW2_files/figure-latex/fig6-1.pdf  used on input line 232.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-[2{c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc} <./Software_CW2_files/figure-latex/fig1-1.pdf>] [3 <./Software_CW2_files/figure-latex/fig2-1.pdf> <./Software_CW2_files/figure-latex/fig3-1.pdf>] [4 <./Software_CW2_files/figure-latex/fig4-1.pdf> <./Software_CW2_files/figure-latex/fig5-1.pdf>]
+[5 <./Software_CW2_files/figure-latex/fig5-1.pdf>]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 176.
+(Font)              <10> on input line 252.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 176.
+(Font)              <7> on input line 252.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 176.
-[5{c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc} <./Software_CW2_files/figure-latex/fig6-1.pdf>]
-<Software_CW2_files/figure-latex/fig7-1.pdf, id=103, 361.35pt x 216.81pt>
+(Font)              <5> on input line 252.
+<Software_CW2_files/figure-latex/fig7-1.pdf, id=91, 289.08pt x 216.81pt>
 File: Software_CW2_files/figure-latex/fig7-1.pdf Graphic file (type pdf)
 <use Software_CW2_files/figure-latex/fig7-1.pdf>
-Package pdftex.def Info: Software_CW2_files/figure-latex/fig7-1.pdf  used on input line 236.
-(pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<Software_CW2_files/figure-latex/fig8-1.pdf, id=104, 361.35pt x 216.81pt>
+Package pdftex.def Info: Software_CW2_files/figure-latex/fig7-1.pdf  used on input line 273.
+(pdftex.def)             Requested size: 289.09251pt x 216.81938pt.
+<Software_CW2_files/figure-latex/fig8-1.pdf, id=93, 289.08pt x 216.81pt>
 File: Software_CW2_files/figure-latex/fig8-1.pdf Graphic file (type pdf)
 <use Software_CW2_files/figure-latex/fig8-1.pdf>
-Package pdftex.def Info: Software_CW2_files/figure-latex/fig8-1.pdf  used on input line 245.
-(pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<Software_CW2_files/figure-latex/fig9-1.pdf, id=105, 361.35pt x 216.81pt>
+Package pdftex.def Info: Software_CW2_files/figure-latex/fig8-1.pdf  used on input line 287.
+(pdftex.def)             Requested size: 289.09251pt x 216.81938pt.
+[6{c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc} <./Software_CW2_files/figure-latex/fig6-1.pdf>] [7 <./Software_CW2_files/figure-latex/fig7-1.pdf> <./Software_CW2_files/figure-latex/fig8-1.pdf>]
+<Software_CW2_files/figure-latex/fig9-1.pdf, id=136, 361.35pt x 216.81pt>
 File: Software_CW2_files/figure-latex/fig9-1.pdf Graphic file (type pdf)
 <use Software_CW2_files/figure-latex/fig9-1.pdf>
-Package pdftex.def Info: Software_CW2_files/figure-latex/fig9-1.pdf  used on input line 254.
+Package pdftex.def Info: Software_CW2_files/figure-latex/fig9-1.pdf  used on input line 302.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<Software_CW2_files/figure-latex/fig10-1.pdf, id=106, 361.35pt x 216.81pt>
+<Software_CW2_files/figure-latex/fig10-1.pdf, id=137, 289.08pt x 216.81pt>
 File: Software_CW2_files/figure-latex/fig10-1.pdf Graphic file (type pdf)
 <use Software_CW2_files/figure-latex/fig10-1.pdf>
-Package pdftex.def Info: Software_CW2_files/figure-latex/fig10-1.pdf  used on input line 263.
-(pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-[6 <./Software_CW2_files/figure-latex/fig7-1.pdf>] [7 <./Software_CW2_files/figure-latex/fig8-1.pdf> <./Software_CW2_files/figure-latex/fig9-1.pdf>] [8 <./Software_CW2_files/figure-latex/fig10-1.pdf>] [9] (./Software_CW2.aux)
+Package pdftex.def Info: Software_CW2_files/figure-latex/fig10-1.pdf  used on input line 320.
+(pdftex.def)             Requested size: 289.09251pt x 216.81938pt.
+[8 <./Software_CW2_files/figure-latex/fig9-1.pdf> <./Software_CW2_files/figure-latex/fig10-1.pdf>]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 332.
+(c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [9] [10] (./Software_CW2.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
-L3 programming layer <2023-08-29>
+L3 programming layer <2023-10-10>
  ***********
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 11480 strings out of 476894
- 180053 string characters out of 5807539
- 1927785 words of memory out of 5000000
- 32556 multiletter control sequences out of 15000+600000
- 595046 words of font info for 73 fonts, out of 8000000 for 9000
+ 11488 strings out of 476470
+ 179799 string characters out of 5800702
+ 1936043 words of memory out of 5000000
+ 32979 multiletter control sequences out of 15000+600000
+ 598041 words of font info for 74 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 89i,6n,93p,375b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on Software_CW2.pdf (9 pages, 8811736 bytes).
+ 89i,6n,93p,400b,540s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
+Output written on Software_CW2.pdf (10 pages, 8818807 bytes).
 PDF statistics:
- 218 PDF objects out of 1000 (max. 8388607)
- 167 compressed objects within 2 object streams
- 32 named destinations out of 1000 (max. 500000)
- 83 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 249 PDF objects out of 1000 (max. 8388607)
+ 197 compressed objects within 2 object streams
+ 40 named destinations out of 1000 (max. 500000)
+ 102 words of extra memory for PDF output out of 10000 (max. 10000000)
 
