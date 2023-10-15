@@ -93,7 +93,7 @@ levels(washington3$Holiday) <- c("Yes", "No") # re naming
 
 ## Introduction
 
-... how season, meteorological factors and more affect the number of bicycle rentals in two cities; Seoul, South Korea, and Washington D.C., USA by an
+In this project we investigate bicycle rentals in two cities, Seoul, South Korea, and Washington D.C., USA by examining locally collected data sets and through the use of statistical modelling. 
 
 \newpage
 
@@ -144,9 +144,22 @@ dc1 <- ggplot(washington3[7905:16637,], aes(x = Date, y = Temperature)) +
 kr1/dc1
 ```
 
-Figure \ref{fig:fig1} shows the air temperature (°C) throughout a year in Washington D.C. and Seoul. The temperature peaks between July and August in both cities. Visibly the climate in Seoul is more extreme than in Washington D.C. in the chosen year, with a hotter summer and colder winter.
+Figure \ref{fig:fig1} shows the air temperature (°C) throughout a year in Washington D.C. and Seoul. The temperature peaks between July and August in both cities with Seoul experiancing a shorter, more pronounced period of peak temperature. Visibly the climate in Seoul is more extreme than in Washington D.C. in the chosen year, with a hotter summer and colder winter.
 
+```{r, echo=FALSE}
+temps <- data.frame("Max" = c(max(seoul3$Temperature),
+                                max(washington3$Temperature)),
+                   "Min" = c(min(seoul3$Temperature),
+                                 min(washington3$Temperature)),
+                   "Mean" = c(mean(seoul3$Temperature),
+                                 mean(washington3$Temperature)))
 
+rownames(temps) <- c("Seoul", "Washington D.C.")
+
+kable(temps, caption = "Temperature (°C)")
+```
+
+Seoul experiences a slightly higher maximum temperature and a much colder minimum temperature, resulting in Washington D.C. having the higher mean temperature.
 
 \newpage
 
@@ -210,14 +223,16 @@ seoul_box <- ggplot(seoul3, aes( x = Season, y = Count)) +
   theme(legend.position='none')
 ```
 
+Figure \ref{fig:fig2} shows the impact of Seoul's colder winter on bike rentals. The bike rentals in winter are noticeably lower than those in Washington D.C. when compared to the other seasons.
+
+Figure \ref{fig:fig2} also shows that the bike rentals in each season are related to the temperature with the highest average rentals in summer, the hottest month for both cities, and the lowest in winter. The bike rentals vary less in Washington D.C. than in Seoul, this is likely due to Washington's less extreme climate exhibited in Figure \ref{fig:fig1}.
+
+
 ```{r fig2, fig.width=4,fig.height=4,fig.cap="\\label{fig:fig2} Bike rentals in Seoul and Washington D.C.", message=FALSE, fig.align='center', echo=FALSE}
 
 seoul_box / wash_box
 ```
 
-Figure \ref{fig:fig2} shows the impact of Seoul's colder winter on bike rentals. The bike rentals in winter are noticeably lower than those in Washington D.C. when compared to the other seasons.
-
-Figure \ref{fig:fig2} also shows that the bike rentals in each season are related to the temperature with the highest average rentals in summer, the hottest month for both cities, and the lowest in winter. The bike rentals vary less in Washington D.C. than in Seoul, this is likely due to Washington's less extreme climate exhibited in Figure \ref{fig:fig1}.
 
 \newpage
 
@@ -316,6 +331,8 @@ The difference between bike rentals on holidays in the two cities suggests a cul
 kable(count_holiday_DC, caption = "Holiday Bike Rentals in Washington D.C.")
 ```
 
+### Meteorological effects
+
 Next we can analyse the effect of different meteorological factors on the number of bike rentals in the two cities. 
 
 ```{r, echo=FALSE}
@@ -387,7 +404,8 @@ Humidity?
 dc_met1 / (dc_met2 + dc_met3)
 ```
 
-The impact of the three meteorological factors is similar in Washington D.C., shown in Figure \ref{fig:fig5}. One noticeable difference is that the bike rentals in Washington D.C. do not see such a decline at the higher temperatures close to 40°C. The decline in bike rentals in Washington D.C. with increasing humidity is more pronounced than in Seoul, starting at ~25% compared to ~50% in Seoul. 
+The impact of the three meteorological factors is similar in Washington D.C., shown in Figure \ref{fig:fig6}. One noticeable difference is that the bike rentals in Washington D.C. do not see such a decline at the higher temperatures close to 40°C. The decline in bike rentals in Washington D.C. with increasing humidity is more pronounced than in Seoul, starting at ~25% compared to ~50% in Seoul. 
+\newpage
 \newpage
 
 ## Modelling
@@ -447,7 +465,7 @@ ggpairs(select(seoul3,Temperature, Humidity, WindSpeed))
 
 ```
 
-Figure X shows that the three meteorological factors selected as independent variables exhibit strong multicollinearity, meaning the assumption of independence between variables isn't shown in the data, which may negatively effect the accuracy and validity of the model for Seoul.
+Figure X shows that the three meteorological factors selected as predictors exhibit strong multicollinearity, meaning the assumption of independence between variables isn't shown in the data, which may negatively effect the accuracy and validity of the model for Seoul.
 
 The data for Washington D.C., shown in Figure Z, suffers from the same issue.
 
@@ -464,11 +482,17 @@ ggpairs(select(washington3,Temperature, Humidity, WindSpeed))
 
 ```{r, echo=FALSE}
 summary(fit_kr)
+```
 
+For the Seoul model, all independent variables are statistically significant at the 1% level, other than than summer not being significantly different to the intercept, spring. A multiple R-squared value of 0.49 indicates that the model is not a very good fit as there is still much variation in bike rentals not explained by the predictors. This may be due to the string multicollinearity between the predictors, and important factors such as time of day and holiday status being left out of the model.
+
+```{r, echo=FALSE}
 summary(fit_dc)
 ```
 
+For the Washington D.C. model, all predictors are statistically significant at the 1% level. The low multiple R-Squared value of 0.28 suggests the model is not a good fit for the data, for similar reasons as the Seoul model.
 
+### Coefficients 
 
 ```{r kr_tab, echo=FALSE}
 
@@ -518,14 +542,18 @@ colnames(pred_dc) <- c("Prediction", "5%", "95%")
 
 pred_dc <- round(exp(pred_dc), 1)
 
-kable(pred_kr, caption = "Seoul prediction")
+preds <- rbind(pred_kr, pred_dc)
+
+rownames(preds) <- c("Seoul", "Washington D.C.")
 
 ```
+
+Using the models for Seoul and Washington, we can make predictions for the average number of bicycle rentals per hour on a unspecified day in a given season with given temperature, humidity, and wind speed. We predict for freezing (0°C) temperature, with 0.5m/s wind speed, humidity of 20%, and in winter.                   
 
 ```{r,echo=FALSE}
 
-kable(pred_dc, caption = "Washington D.C. prediction")
+kable(preds, caption = "Bike rental prediction")
 
 ```
 
-
+The model predicts 370 bike rentals per hour in Seoul and 72 in Washington D.C..
