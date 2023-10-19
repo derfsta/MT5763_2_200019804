@@ -27,33 +27,33 @@ washington <- read.csv("BikeWashingtonDC.csv")
 
 seoul2 <- seoul %>%
   
-  select(-Visibility..10m.,
+  select(-Visibility..10m.,             # removing required columns 
          -Dew.point.temperature.C.,
          -Solar.Radiation..MJ.m2.,
          -Rainfall.mm., -Snowfall..cm.) %>%
   
-  filter(Functioning.Day == "Yes") %>%
+  filter(Functioning.Day == "Yes") %>%    #filtering out nonfunctional days
   
-  select(-Functioning.Day)
+  select(-Functioning.Day)     #removing functioning day column
 
 
 colnames(seoul2) <- c("Date", "Count", "Hour", "Temperature", "Humidity",
-  "WindSpeed", "Season", "Holiday") #way to do with pipe????
+  "WindSpeed", "Season", "Holiday") # renaming columns 
 
 
 seoul3 <- mutate(seoul2, "Date" = as.Date(Date, format = "%d/%m/%Y")) %>%
   
   mutate("FullDate" = make_datetime(
            
-           year(Date),month(Date), day(Date),Hour))
+           year(Date),month(Date), day(Date),Hour))  #creating a full date col
 
 
 
 seoul3$Holiday <- as.factor(seoul3$Holiday)
-levels(seoul3$Holiday) <- c("Yes", "No")
+levels(seoul3$Holiday) <- c("Yes", "No")   # re naming holiday factors
 
 
-seoul3$Season <- as.factor(seoul3$Season)
+seoul3$Season <- as.factor(seoul3$Season) #re ordering season factor levsls
 seoul3$Season <- factor(seoul3$Season, 
                         levels = c("Spring","Summer",
                                    "Autumn", "Winter"))
@@ -62,10 +62,10 @@ seoul3$Season <- factor(seoul3$Season,
 washington2 <- washington %>%
   
   select(-instant, -yr, -mnth, -weekday, -workingday,
-         -weathersit, -atemp, -casual, -registered)
+         -weathersit, -atemp, -casual, -registered) # removing required columns
 
 colnames(washington2) <- c("Date", "Season", "Hour", "Holiday",
-                "Temperature", "Humidity", "WindSpeed", "Count")
+                "Temperature", "Humidity", "WindSpeed", "Count") #renaming cols
 
 washington3 <- washington2 %>%
   
@@ -74,7 +74,7 @@ washington3 <- washington2 %>%
          "WindSpeed" = (5/18)*67*WindSpeed,
          "Date" = as.Date(Date, format = "%Y-%m-%d"),
          "FullDate" = make_datetime(
-           year(Date),month(Date), day(Date),Hour)) 
+           year(Date),month(Date), day(Date),Hour)) #transforming variables
   
 
 washington3$Season <- factor(washington3$Season,
@@ -102,6 +102,9 @@ In this project we investigate bicycle rentals in two cities, Seoul, South Korea
 To begin to understand bike rental numbers in the two cities, it is important to understand each city's climate.
 
 ```{r, temperature plots, echo=FALSE}
+
+# Creating plots for air temperature in D.C. and Seoul over a one year period
+
 kr1 <- ggplot(seoul3, aes(x = Date, y = Temperature)) +
   geom_point(aes(color = Hour), alpha = 0.2) +
   
@@ -147,6 +150,8 @@ kr1/dc1
 Figure \ref{fig:fig1} shows the air temperature (°C) throughout a year in Washington D.C. and Seoul. The temperature peaks between July and August in both cities with Seoul experiancing a shorter, more pronounced period of peak temperature. Visibly the climate in Seoul is more extreme than in Washington D.C. in the chosen year, with a hotter summer and colder winter.
 
 ```{r, echo=FALSE}
+# Creating summary table for weather comparison between Seoul and D.C. 
+
 temps <- data.frame("Max" = c(max(seoul3$Temperature),
                                 max(washington3$Temperature)),
                    "Min" = c(min(seoul3$Temperature),
@@ -166,6 +171,8 @@ Seoul experiences a slightly higher maximum temperature and a much colder minimu
 ### Bicycle Rentals
 
 ```{r, echo=FALSE}
+# Creating box plots for bike rentals per hour in Seoul and D.C. in each season.
+
 wash_box <- ggplot(washington3, aes( x = Season, y = Count)) +
   
   geom_boxplot(aes(fill = Season)) + theme_light() +
@@ -174,12 +181,13 @@ wash_box <- ggplot(washington3, aes( x = Season, y = Count)) +
   
   theme(legend.position='none')
 
+
 seoul_box <- ggplot(seoul3, aes( x = Season, y = Count)) +
   
   geom_boxplot(aes(fill = Season)) + theme_light() +
   
-  labs(title = "Bicycle rentals per day by season", subtitle = "Seoul", x = NULL,
-       y = "Rentals per hour") +
+  labs(title = "Bicycle rentals per day by season", subtitle = "Seoul",
+       x = NULL, y = "Rentals per hour") +
   
   theme(legend.position='none')
 ```
@@ -198,6 +206,9 @@ seoul_box / wash_box
 \newpage
 
 ```{r, echo=FALSE, message=FALSE}
+
+# Calculating average bike rentals per hour in each season in Seoul and D.C.
+
 count_time_DC <- washington3 %>% group_by(Season, Hour) %>%
   
   summarise("Count" = mean(Count))
@@ -208,7 +219,7 @@ count_time_KR <- seoul3 %>% group_by(Season, Hour) %>%
   summarise("Count" = mean(Count))
 
 
-
+# Plotting results
 
 DC_time <- ggplot(count_time_DC, aes(x = Hour, y = Count)) + 
   
@@ -244,9 +255,11 @@ KR_time / DC_time
 
 Figure \ref{fig:fig3} shows the relationship between time of day and bike rentals in each season in the two cities. In Washington D.C. the average bike rentals peak between 16:00 and 17:00 year round, with summer peaking the latest.
 
-The average bike rentals per hour in Seoul vary more between seasons than Washington D.C.. Firstly the the average bike rentals in Seoul peak later in the day than in Washington D.c., most noticeably in summer and autumn peaking at 20:00 and 18:00 respectively. Visibly the the average bike rentals in Seoul stay at their maximum values for longer than in D.C..
+The average bike rentals per hour in Seoul vary more between seasons than Washington D.C.. Firstly the the average bike rentals in Seoul peak later in the day than in Washington D.C., most noticeably in summer and autumn peaking at 20:00 and 18:00 respectively. Visibly the the average bike rentals in Seoul stay at their maximum values for longer than in D.C..
 
 ```{r, echo=FALSE, message=FALSE}
+# Creating data for tables showing average bike rentals on Holidays 
+
 count_holiday_DC <- washington3 %>% group_by(Holiday) %>%
   
   summarise("Count" = round(mean(Count), 1))
@@ -263,7 +276,7 @@ kable(count_holiday_KR,
 
 ```
 
-Table X and Y show the impact of holidays on bike rentals in Seoul and Washington D.c. respectively. On average, the bike rentals in Seoul on a holiday are 28% lower than a non-holiday. This is likely due to the lack of commuters renting bikes.
+Table 2 and Table 3 show the impact of holidays on bike rentals in Seoul and Washington D.C. respectively. On average, the bike rentals in Seoul on a holiday are 28% lower than a non-holiday. This is likely due to the lack of commuters renting bikes.
 
 Similarly, the average bike rentals in Washington D.C. on a holiday are 17% lower than a non-holiday. 
 
@@ -281,14 +294,17 @@ kable(count_holiday_DC,
 Next we can analyse the effect of different meteorological factors on the number of bike rentals in the two cities. 
 
 ```{r, echo=FALSE}
+# Creating plots for each meteorological factor in Seoul and D.C.
+
 kr_met1 <- ggplot(seoul3, aes(y = Count, x = WindSpeed)) +
   
   geom_jitter(width = 0.02, height = 0,
-              alpha = 0.5,color = "#001B6B") + 
+              alpha = 0.5, color = "#001B6B") + 
   
   geom_smooth() +
   
   labs(x = "Wind Speed (m/s)")
+
 
 kr_met2 <- ggplot(seoul3, aes(y = Count, x = Temperature)) +
   
@@ -298,14 +314,13 @@ kr_met2 <- ggplot(seoul3, aes(y = Count, x = Temperature)) +
   "Number of bike rentals for different meteoroloigcal\nfactors in Seoul")
 
 
-
 kr_met3 <- ggplot(seoul3, aes(y = Count, x = Humidity)) +
   
   geom_point(alpha = 0.5, color = "#001B6B") + 
   
   geom_smooth() + labs(x = "Humidity (%)")
 
-#this one sucks
+
 
 
 dc_met1 <- ggplot(washington3, aes(y = Count, x = WindSpeed)) +
@@ -316,13 +331,13 @@ dc_met1 <- ggplot(washington3, aes(y = Count, x = WindSpeed)) +
   
   labs(x = "Wind Speed (m/s)")
 
+
 dc_met2 <- ggplot(washington3, aes(y = Count, x = Temperature)) +
   
   geom_jitter(width = 0.2, alpha = 0.5, color = "#001B6B") + 
   
   geom_smooth() + labs(x = "Temperature (°C)", title =
          "Number of bike rentals for different meteoroloigcal\nfactors in Washington D.C.")
-
 
 
 dc_met3 <- ggplot(washington3, aes(y = Count, x = Humidity)) +
@@ -360,6 +375,8 @@ log(Count)\sim Season\;+\; Temperature \;+\; Humidity \;+\; Wind Speed.
 $$
 
 ```{r, echo=FALSE}
+# Fitting linear models on required predictors
+
 fit_kr <- lm(log(Count) ~ Season + Temperature +
                
                Humidity + WindSpeed, data = seoul3)
@@ -374,6 +391,8 @@ fit_dc <- lm(log(Count) ~ Season + Temperature +
 ```
 
 ```{r, echo = FALSE}
+# extracting residuals 
+
 kr_resid <- resid(fit_kr)
 dc_resid <- resid(fit_dc)
 ```
@@ -385,6 +404,9 @@ To assess the effectiveness, reliability, and validity of the models, it is impo
 Figures \ref{fig:fig7} and \ref{fig:fig8} show Normal Quantile-Quantile plots for the residuals of the models for Seoul and Washington D.C. respectively.
 
 ```{r fig6, fig.width=4,fig.height=3,fig.cap="\\label{fig:fig6} Seoul normal Q-Q plot", message=FALSE, fig.align='center', echo=FALSE}
+
+# normal q-q plot for residuals with reference line
+
 qqnorm(kr_resid, main = "Seoul Normal Q-Q Plot")
 
 abline(a = 0, b = 1, col = "blue", lty = 2)
@@ -393,6 +415,7 @@ abline(a = 0, b = 1, col = "blue", lty = 2)
 The data for Seoul, shown above in Figure \ref{fig:fig6}, exhibits a slight left-skew for its tails however, the main body of the data lies on the reference line, indicating the assumption of normality of residuals is fair.
 
 ```{r fig7, fig.width=4,fig.height=3,fig.cap="\\label{fig:fig7} Washington D.C. normal Q-Q plot", message=FALSE, fig.align='center', echo=FALSE}
+
 qqnorm(dc_resid, main = "Washington D.C. Normal Q-Q Plot")
 
 abline(a = 0, b = 1, col = "red", lty = 2)
@@ -404,6 +427,8 @@ The data for Washington D.C.,Figure \ref{fig:fig7}, is light tailed although the
 
 ```{r fig8, fig.width=5,fig.height=3,fig.cap="\\label{fig:fig8} Seoul scatterplot matrix", message=FALSE, fig.align='center', echo=FALSE}
 
+# scatterplot matrix for Seoul
+
 ggpairs(select(seoul3,Temperature, Humidity, WindSpeed))
 
 ```
@@ -413,6 +438,8 @@ Figure \ref{fig:fig8} shows that the three meteorological factors selected as pr
 The data for Washington D.C., shown in Figure \ref{fig:fig9}, suffers from the same issue.
 
 ```{r fig9, fig.width=5,fig.height=3,fig.cap="\\label{fig:fig9} Washington D.C. scatterplot matrix", message=FALSE, fig.align='center', echo=FALSE}
+
+# scatterplot matrix for D.C.
 
 ggpairs(select(washington3,Temperature, Humidity, WindSpeed))
 
@@ -424,6 +451,8 @@ ggpairs(select(washington3,Temperature, Humidity, WindSpeed))
 ### Model Analysis
 
 ```{r, echo=FALSE}
+# model summary
+
 summary(fit_kr)
 ```
 
@@ -440,7 +469,11 @@ For the Washington D.C. model, all predictors are statistically significant at t
 
 ```{r kr_tab, echo=FALSE}
 
+#calculating 97% confidence intervals for model coefficients 
+
 kr_conf <- confint(fit_kr, level = 0.97)
+
+#renaming rows for presentation
 
 rownames(kr_conf) <- c("Intercept", "Summer", "Autumn",
                        "Winter","Temperature", "Humidity", "Wind Speed")
@@ -465,6 +498,8 @@ The D.C. model has (>97%) negative coefficients summer and humidity. This is une
 ## Prediction
 
 ```{r, echo=FALSE}
+# creating dataframe for prediction variables
+
 params <-data.frame(Temperature = 0,
                   WindSpeed = 0.5,
                   Humidity = 20,
@@ -474,13 +509,21 @@ params <-data.frame(Temperature = 0,
 
 ```{r, echo=FALSE}
 
+# predicting with 90% confidence interval
+
 pred_kr <- predict(fit_kr, newdata = params,
         
         interval = "confidence", level = 0.9)
 
+# re naming columns
+
 colnames(pred_kr) <- c("Prediction", "5%", "95%")
 
+# rounding values
+
 pred_kr <- round(exp(pred_kr), 1)
+
+# repeating for D.C.
 
 pred_dc <- predict(fit_dc, newdata = params, 
         
@@ -490,7 +533,11 @@ colnames(pred_dc) <- c("Prediction", "5%", "95%")
 
 pred_dc <- round(exp(pred_dc), 1)
 
+# combining D.C. and Seoul predictions
+
 preds <- rbind(pred_kr, pred_dc)
+
+# creating row names for table
 
 rownames(preds) <- c("Seoul", "Washington D.C.")
 
@@ -499,6 +546,7 @@ rownames(preds) <- c("Seoul", "Washington D.C.")
 Using the models for Seoul and Washington, we can make predictions for the average number of bicycle rentals per hour on a unspecified day in a given season with given temperature, humidity, and wind speed. We predict for freezing (0°C) temperature, with 0.5m/s wind speed, humidity of 20%, and in winter.                   
 
 ```{r,echo=FALSE}
+# presenting prediction results
 
 kable(preds, caption = "Bike rental prediction")
 
