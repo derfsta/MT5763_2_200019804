@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.15)  15 OCT 2023 21:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.15)  17 OCT 2023 15:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -383,6 +383,9 @@ LaTeX Warning: Label `fig:fig2' multiply defined.
 LaTeX Warning: Label `fig:fig2' multiply defined.
 
 
+LaTeX Warning: Label `fig:fig4' multiply defined.
+
+
 LaTeX Warning: Label `fig:fig5' multiply defined.
 
 
@@ -396,9 +399,6 @@ LaTeX Warning: Label `fig:fig8' multiply defined.
 
 
 LaTeX Warning: Label `fig:fig9' multiply defined.
-
-
-LaTeX Warning: Label `fig:fig10' multiply defined.
 
 )
 \openout1 = `Software_CW2.aux'.
@@ -515,49 +515,49 @@ File: Software_CW2_files/figure-latex/fig3-1.pdf Graphic file (type pdf)
 Package pdftex.def Info: Software_CW2_files/figure-latex/fig3-1.pdf  used on input line 162.
 (pdftex.def)             Requested size: 289.09251pt x 289.09251pt.
 [4 <./Software_CW2_files/figure-latex/fig3-1.pdf>]
-<Software_CW2_files/figure-latex/fig5-1.pdf, id=70, 361.35pt x 216.81pt>
+<Software_CW2_files/figure-latex/fig4-1.pdf, id=70, 361.35pt x 216.81pt>
+File: Software_CW2_files/figure-latex/fig4-1.pdf Graphic file (type pdf)
+<use Software_CW2_files/figure-latex/fig4-1.pdf>
+Package pdftex.def Info: Software_CW2_files/figure-latex/fig4-1.pdf  used on input line 233.
+(pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
+<Software_CW2_files/figure-latex/fig5-1.pdf, id=72, 361.35pt x 216.81pt>
 File: Software_CW2_files/figure-latex/fig5-1.pdf Graphic file (type pdf)
 <use Software_CW2_files/figure-latex/fig5-1.pdf>
-Package pdftex.def Info: Software_CW2_files/figure-latex/fig5-1.pdf  used on input line 233.
+Package pdftex.def Info: Software_CW2_files/figure-latex/fig5-1.pdf  used on input line 255.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<Software_CW2_files/figure-latex/fig6-1.pdf, id=72, 361.35pt x 216.81pt>
-File: Software_CW2_files/figure-latex/fig6-1.pdf Graphic file (type pdf)
-<use Software_CW2_files/figure-latex/fig6-1.pdf>
-Package pdftex.def Info: Software_CW2_files/figure-latex/fig6-1.pdf  used on input line 255.
-(pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-[5 <./Software_CW2_files/figure-latex/fig5-1.pdf>]
+[5 <./Software_CW2_files/figure-latex/fig4-1.pdf>]
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10> on input line 275.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 275.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 275.
-<Software_CW2_files/figure-latex/fig7-1.pdf, id=94, 289.08pt x 216.81pt>
+<Software_CW2_files/figure-latex/fig6-1.pdf, id=96, 289.08pt x 216.81pt>
+File: Software_CW2_files/figure-latex/fig6-1.pdf Graphic file (type pdf)
+<use Software_CW2_files/figure-latex/fig6-1.pdf>
+Package pdftex.def Info: Software_CW2_files/figure-latex/fig6-1.pdf  used on input line 297.
+(pdftex.def)             Requested size: 289.09251pt x 216.81938pt.
+<Software_CW2_files/figure-latex/fig7-1.pdf, id=98, 289.08pt x 216.81pt>
 File: Software_CW2_files/figure-latex/fig7-1.pdf Graphic file (type pdf)
 <use Software_CW2_files/figure-latex/fig7-1.pdf>
-Package pdftex.def Info: Software_CW2_files/figure-latex/fig7-1.pdf  used on input line 296.
+Package pdftex.def Info: Software_CW2_files/figure-latex/fig7-1.pdf  used on input line 311.
 (pdftex.def)             Requested size: 289.09251pt x 216.81938pt.
-<Software_CW2_files/figure-latex/fig8-1.pdf, id=96, 289.08pt x 216.81pt>
+[6{c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc} <./Software_CW2_files/figure-latex/fig5-1.pdf>] [7 <./Software_CW2_files/figure-latex/fig6-1.pdf> <./Software_CW2_files/figure-latex/fig7-1.pdf>]
+<Software_CW2_files/figure-latex/fig8-1.pdf, id=141, 361.35pt x 216.81pt>
 File: Software_CW2_files/figure-latex/fig8-1.pdf Graphic file (type pdf)
 <use Software_CW2_files/figure-latex/fig8-1.pdf>
-Package pdftex.def Info: Software_CW2_files/figure-latex/fig8-1.pdf  used on input line 310.
-(pdftex.def)             Requested size: 289.09251pt x 216.81938pt.
-[6{c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc} <./Software_CW2_files/figure-latex/fig6-1.pdf>] [7 <./Software_CW2_files/figure-latex/fig7-1.pdf> <./Software_CW2_files/figure-latex/fig8-1.pdf>]
-<Software_CW2_files/figure-latex/fig9-1.pdf, id=140, 361.35pt x 216.81pt>
+Package pdftex.def Info: Software_CW2_files/figure-latex/fig8-1.pdf  used on input line 326.
+(pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
+<Software_CW2_files/figure-latex/fig9-1.pdf, id=144, 361.35pt x 216.81pt>
 File: Software_CW2_files/figure-latex/fig9-1.pdf Graphic file (type pdf)
 <use Software_CW2_files/figure-latex/fig9-1.pdf>
-Package pdftex.def Info: Software_CW2_files/figure-latex/fig9-1.pdf  used on input line 325.
+Package pdftex.def Info: Software_CW2_files/figure-latex/fig9-1.pdf  used on input line 344.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<Software_CW2_files/figure-latex/fig10-1.pdf, id=141, 289.08pt x 216.81pt>
-File: Software_CW2_files/figure-latex/fig10-1.pdf Graphic file (type pdf)
-<use Software_CW2_files/figure-latex/fig10-1.pdf>
-Package pdftex.def Info: Software_CW2_files/figure-latex/fig10-1.pdf  used on input line 342.
-(pdftex.def)             Requested size: 289.09251pt x 216.81938pt.
-[8 <./Software_CW2_files/figure-latex/fig9-1.pdf> <./Software_CW2_files/figure-latex/fig10-1.pdf>]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 354.
+[8 <./Software_CW2_files/figure-latex/fig8-1.pdf> <./Software_CW2_files/figure-latex/fig9-1.pdf>]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 356.
 (c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [9] [10] (./Software_CW2.aux)
+) [9] [10] [11] (./Software_CW2.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-10>
@@ -568,17 +568,17 @@ LaTeX Warning: There were multiply-defined labels.
  ) 
 Here is how much of TeX's memory you used:
  11496 strings out of 476470
- 179901 string characters out of 5800702
+ 179883 string characters out of 5800702
  1934043 words of memory out of 5000000
- 32983 multiletter control sequences out of 15000+600000
+ 32982 multiletter control sequences out of 15000+600000
  598041 words of font info for 74 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  89i,6n,93p,400b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/fredk/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on Software_CW2.pdf (10 pages, 8821670 bytes).
+Output written on Software_CW2.pdf (11 pages, 8834126 bytes).
 PDF statistics:
- 261 PDF objects out of 1000 (max. 8388607)
- 208 compressed objects within 3 object streams
- 44 named destinations out of 1000 (max. 500000)
+ 271 PDF objects out of 1000 (max. 8388607)
+ 217 compressed objects within 3 object streams
+ 45 named destinations out of 1000 (max. 500000)
  118 words of extra memory for PDF output out of 10000 (max. 10000000)
 
